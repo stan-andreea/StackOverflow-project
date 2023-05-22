@@ -32,11 +32,11 @@ public class ContentService {
         List<Content> contentList =  contentRepository.findByQuestionIdIsNull();
         List<Content> sortedContentList = contentList.stream()
                 .sorted((c1, c2) -> {
-                    int dateComparison = c1.getDateCreated().compareTo(c2.getDateCreated());
+                    int dateComparison = c2.getDateCreated().compareTo(c1.getDateCreated());
                     if (dateComparison != 0) {
                         return dateComparison;
                     } else {
-                        return Integer.compare(c1.getTimeMinutes(), c2.getTimeMinutes());
+                        return Integer.compare(c2.getTimeMinutes(), c1.getTimeMinutes());
                     }
                 })
                 .collect(Collectors.toList());
@@ -71,16 +71,9 @@ public class ContentService {
     public void deleteQuestion(Long id){
         Optional<Content> question = contentRepository.findById(id);
 
-        // Check if the question exists and is a question (not an answer)
         if (question.isPresent() && question.get().getQuestion() == null) {
-
-            // Find all answers to this question
             List<Content> answers = contentRepository.findByQuestionId(id);
-
-            // Delete all answers
             contentRepository.deleteAll(answers);
-
-            // Delete the question itself
             contentRepository.delete(question.get());
         } else {
             throw new IllegalArgumentException("Message with id " + id + " is not a valid question");
@@ -109,7 +102,6 @@ public class ContentService {
         content.setTimeMinutes(hour*60+minute);
         content = contentRepository.save(content);
 
-        //add tags
         String[] tagNameArray = tagNames.split(",");
         List<Long> tagIds = new ArrayList<Long>();
         for (String tagName : tagNameArray) {
@@ -134,12 +126,6 @@ public class ContentService {
         }
 
 
-
-        /*for(int i = 0; i < content.getTag_ids().size(); i++){
-            System.out.println(content.getTag_ids());
-
-            questionTagRepository.save(new QuestionTag(0L, new Tag(content.getTag_ids().get(i)), new Content(content.getId())));
-        }*/
         return content;
     }
 
@@ -252,7 +238,7 @@ public class ContentService {
 
             return contentRepository.save(content);
         } else {
-            return null; // User with the given ID not found
+            return null;
         }
     }
 

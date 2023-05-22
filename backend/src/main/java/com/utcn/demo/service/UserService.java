@@ -80,7 +80,7 @@ public class UserService {
 
             return userRepository.save(user);
         } else {
-            return null; // User with the given ID not found
+            return null;
         }
     }
 

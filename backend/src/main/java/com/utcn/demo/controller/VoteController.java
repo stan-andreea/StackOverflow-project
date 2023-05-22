@@ -1,16 +1,8 @@
 package com.utcn.demo.controller;
 
-import com.utcn.demo.entity.Content;
-import com.utcn.demo.entity.User;
-import com.utcn.demo.service.UserService;
 import com.utcn.demo.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")

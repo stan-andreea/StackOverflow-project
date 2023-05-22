@@ -4,7 +4,6 @@ import com.utcn.demo.controller.ContentController;
 import com.utcn.demo.controller.UserController;
 import com.utcn.demo.entity.Content;
 import com.utcn.demo.entity.User;
-import com.utcn.demo.repository.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,7 +25,6 @@ public class ContentTests {
     private UserController userController;
 
 
-    // JUnit test for saveEmployee
     @Test
     @Order(1)
     @Rollback(value = false)

@@ -3,13 +3,9 @@ package com.utcn.demo.service;
 import com.utcn.demo.entity.*;
 import com.utcn.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 @Service
 public class VoteService {
@@ -38,13 +34,11 @@ public class VoteService {
 
             if (vote == null) {
                 if(content.getQuestion()==null)
-                      scoreIncrement = 2.5; // +2.5 points for a question upvote
+                      scoreIncrement = 2.5;
                 else
                     scoreIncrement = 5;
                 author.setPoints(author.getPoints()+scoreIncrement);
 
-
-                // Save the updated user score
                 userRepository.save(author);
 
                 vote = new Vote();
